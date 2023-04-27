@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 // DEPENDENCIES
 const express = require("express");
 const methodOverride = require("method-override");
@@ -14,6 +16,9 @@ app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 app.use(methodOverride("_method"));
 
+// MIDDLEWARE
+app.use(express.urlencoded({ extended: true }));
+
 // ROUTES
 app.get("/", (req, res) => {
   res.send("Welcome to an Awesome App about Breads!");
@@ -28,8 +33,14 @@ app.get("*", (req, res) => {
   res.send("404");
 });
 
-// MIDDLEWARE
-app.use(express.urlencoded({ extended: true }));
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("connected to mongo: ", process.env.MONGO_URI);
+  });
 
 // LISTEN
 app.listen(PORT, () => {
