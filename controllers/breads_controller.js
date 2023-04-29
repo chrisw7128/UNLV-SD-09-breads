@@ -36,7 +36,9 @@ breads.delete("/:id", (req, res) => {
 breads.get("/:id", (req, res) => {
   Bread.findById(req.params.id)
     .then(foundBread => {
-      res.render("Show", {
+      const bakedBy = foundBread.getBakedBy();
+      console.log(bakedBy);
+      res.render("show", {
         bread: foundBread,
       });
     })
