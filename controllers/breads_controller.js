@@ -2,6 +2,18 @@ const express = require("express");
 const breads = express.Router();
 const Bread = require("../models/bread.js");
 
+// somewhere at the top with the other dependencies
+const Baker = require("../models/baker.js");
+
+// in the new route
+breads.get("/new", (req, res) => {
+  Baker.find().then(foundBakers => {
+    res.render("new", {
+      bakers: foundBakers,
+    });
+  });
+});
+
 // INDEX
 breads.get("/", (req, res) => {
   Bread.find().then(foundBreads => {
