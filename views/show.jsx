@@ -19,10 +19,10 @@ function Show ({bread, index}) {
         <img src={bread.image} alt={bread.name} />
         <p>{bread.getBakedby()}</p>
         <li><a href={`/breads/${bread.id}/edit`}><button>Edit</button></a>
-</li>
-<form action={`/breads/${bread.id}?_method=DELETE`} method="POST">
-  <input type='submit' value="DELETE"/>
-</form>
+        </li>
+        <form action={`/breads/${bread.id}?_method=DELETE`} method="POST">
+          <input type='submit' value="DELETE"/>
+        </form>
 
       </Default>
       
